@@ -1,1 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>AI Logo UMKM — PahamSEO</title>
+<style>
+  :root{
+    --black:#080808;
+    --gold:#c79a62;
+    --gold-soft:#f8efe3;
+    --text:#171717;
+    --muted:#666;
+    --line:#dedede;
+    --white:#fff;
+    --green:#2f7d57;
+    --green-soft:#edf7f1;
+    --danger:#b42318;
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:#f5f5f5;
+    color:var(--text);
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    font-size:16px;
+    line-height:1.5;
+  }
+  .topbar{
+    background:var(--black);
+    min-height:74px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:12px 18px;
+    position:sticky;
+    top:0;
+    z-index:20;
+  }
+  .brand{
+    color:#fff;
+    text-align:center;
+    font-weight:800;
+    letter-spacing:-1px;
+    font-size:27px;
+    line-height:1;
+  }
+  .brand span{color:var(--gold)}
+  .tagline{
+    display:block;
+    margin-top:5px;
+    font-size:9px;
+    letter-spacing:5px;
+    font-weight:700;
+    color:#fff;
+  }
+  .container{
+    width:min(760px,100%);
+    margin:0 auto;
+    padding:24px 16px 48px;
+  }
+  .hero{
+    padding:8px 2px 18px;
+  }
+  .eyebrow{
+    color:var(--gold);
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+  }
+  h1{
+    margin:3px 0 6px;
+    font-size:clamp(31px,8vw,46px);
+    line-height:1.05;
+    letter-spacing:-1.5px;
+  }
+  .hero p{
+    margin:0;
+    color:#555;
+    font-size:17px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:var(--radius);
+    padding:20px;
+    margin-top:16px;
+    box-shadow:0 5px 18px rgba(0,0,0,.04);
+  }
+  .steps{
+    display:grid;
+    gap:14px;
+  }
+  .step{
+    display:grid;
+    grid-template-columns:38px 1fr;
+    gap:12px;
+    align-items:start;
+  }
+  .num{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--black);color:#fff;
+    display:grid;place-items:center;
+    font-weight:800;
+  }
+  .step strong{display:block;font-size:17px;margin-bottom:2px}
+  .step p{margin:0;color:#666;font-size:15px}
+  .notice{
+    margin-top:16px;
+    padding:13px 14px;
+    border-radius:13px;
+    background:var(--gold-soft);
+    font-size:14px;
+  }
+  .section-title{
+    font-size:19px;
+    font-weight:850;
+    margin:0 0 16px;
+  }
+  label{
+    display:block;
+    font-weight:750;
+    margin-bottom:7px;
+    font-size:16px;
+  }
+  .required{color:var(--danger)}
+  .field{margin-bottom:18px}
+  input, textarea, select{
+    width:100%;
+    border:1.5px solid #d4d4d4;
+    border-radius:12px;
+    background:#fff;
+    color:#161616;
+    font:inherit;
+    min-height:50px;
+    padding:12px 14px;
+    outline:none;
+  }
+  textarea{
+    min-height:125px;
+    resize:vertical;
+  }
+  input:focus,textarea:focus,select:focus{
+    border-color:#111;
+    box-shadow:0 0 0 3px rgba(199,154,98,.18);
+  }
+  .helper{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    color:#777;
+    font-size:13px;
+    margin-top:5px;
+  }
+  .counter.over{color:var(--danger);font-weight:800}
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .select-wrap{position:relative}
+  select{
+    appearance:none;
+    -webkit-appearance:none;
+    padding-right:42px;
+  }
+  .select-wrap::after{
+    content:"⌄";
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-56%);
+    pointer-events:none;
+    font-size:22px;
+  }
+  .recommended{
+    font-weight:800;
+  }
+  .small-note{
+    color:#777;
+    font-size:13px;
+    margin-top:5px;
+  }
+  .actions{
+    margin-top:4px;
+  }
+  button{
+    width:100%;
+    min-height:54px;
+    border:0;
+    border-radius:13px;
+    padding:13px 16px;
+    font:inherit;
+    font-weight:850;
+    cursor:pointer;
+    touch-action:manipulation;
+  }
+  .primary{
+    background:var(--black);
+    color:#fff;
+    font-size:17px;
+  }
+  .primary:active{transform:translateY(1px)}
+  .secondary{
+    background:#f1f1f1;
+    color:#111;
+    margin-top:10px;
+  }
+  .result{
+    display:none;
+  }
+  .result.show{display:block}
+  .prompt-box{
+    background:#fafafa;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:15px;
+    white-space:pre-wrap;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:13px;
+    line-height:1.6;
+    max-height:420px;
+    overflow:auto;
+  }
+  .checklist{
+    margin:0;
+    padding-left:20px;
+    color:#444;
+  }
+  .checklist li{margin:5px 0}
+  .success{
+    background:var(--green-soft);
+    border:1px solid #cce8d9;
+    border-radius:13px;
+    padding:14px;
+    margin-bottom:14px;
+  }
+  .success strong{display:block;margin-bottom:2px}
+  .footer{
+    text-align:center;
+    color:#777;
+    font-size:13px;
+    padding:24px 10px 0;
+  }
+  @media(max-width:560px){
+    .container{padding:18px 13px 40px}
+    .card{padding:17px;border-radius:15px}
+    .grid2{grid-template-columns:1fr}
+    .topbar{min-height:68px}
+    .brand{font-size:24px}
+  }
+</style>
+</head>
+<body>
 
+<header class="topbar">
+  <div class="brand">PAHAM<span>SEO</span><span class="tagline">See You in Page One</span></div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">AI untuk UMKM</div>
+    <h1>AI LOGO UMKM</h1>
+    <p>Buat prompt logo yang siap digunakan di ChatGPT atau AI Image Generator.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">3 langkah mudah</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <div><strong>Isi informasi usaha</strong><p>Masukkan nama usaha dan ceritakan usaha Anda maksimal 300 karakter.</p></div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div><strong>Pilih preferensi logo</strong><p>Gunakan pilihan yang tersedia. Pilihan paling atas adalah rekomendasi AI.</p></div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div><strong>Salin prompt ke AI</strong><p>Salin prompt yang dibuat lalu gunakan pada ChatGPT atau AI pembuat gambar.</p></div>
+      </div>
+    </div>
+    <div class="notice">
+      <strong>Tidak perlu menjadi desainer.</strong><br>
+      Jika bingung memilih, gunakan <strong>AI menentukan (Rekomendasi)</strong>. AI akan menyesuaikan pilihan dengan cerita usaha Anda.
+    </div>
+  </section>
+
+  <section class="card" id="formCard">
+    <h2 class="section-title">Informasi Usaha</h2>
+
+    <div class="field">
+      <label for="name">Nama Produk / Brand / Nama Usaha <span class="required">*</span></label>
+      <input id="name" type="text" maxlength="100" placeholder="Contoh: Madu Pidie Jaya" autocomplete="organization">
+    </div>
+
+    <div class="field">
+      <label for="story">Ceritakan sedikit tentang usaha Anda <span class="required">*</span></label>
+      <textarea id="story" maxlength="300" placeholder="Contoh: Kami memproduksi madu dari peternak lokal dan menjualnya untuk keluarga yang ingin mengonsumsi madu alami."></textarea>
+      <div class="helper">
+        <span>Semakin jelas ceritanya, semakin relevan rekomendasi AI.</span>
+        <span id="counter" class="counter">0/300</span>
+      </div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:25px">Preferensi Logo</h2>
+
+    <div class="field">
+      <label for="category">Kategori Usaha <span class="required">*</span></label>
+      <div class="select-wrap">
+        <select id="category">
+          <option value="" selected disabled>Pilih kategori usaha</option>
+          <option>Makanan</option>
+          <option>Minuman</option>
+          <option>Kue & Roti</option>
+          <option>Kopi</option>
+          <option>Pertanian</option>
+          <option>Perkebunan</option>
+          <option>Peternakan</option>
+          <option>Perikanan</option>
+          <option>Kerajinan</option>
+          <option>Fashion</option>
+          <option>Kecantikan & Perawatan</option>
+          <option>Jasa</option>
+          <option>Perdagangan</option>
+          <option>Lainnya</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label for="style">Gaya Logo</label>
+        <div class="select-wrap">
+          <select id="style">
+            <option value="AI menentukan berdasarkan cerita usaha" selected class="recommended">AI menentukan (Rekomendasi)</option>
+            <option>Minimalis — sederhana & mudah diingat</option>
+            <option>Modern — profesional & kekinian</option>
+            <option>Tradisional — budaya & kearifan lokal</option>
+            <option>Natural — alami & organik</option>
+            <option>Premium — elegan & eksklusif</option>
+            <option>Ceria — ramah & menyenangkan</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="color">Warna Utama</label>
+        <div class="select-wrap">
+          <select id="color">
+            <option value="AI menentukan berdasarkan cerita usaha" selected>AI menentukan (Rekomendasi)</option>
+            <option>Merah — berani, kuat & menggugah selera</option>
+            <option>Hijau — alami, segar & sehat</option>
+            <option>Oranye — hangat, energik & ramah</option>
+            <option>Kuning — ceria, optimis & menarik perhatian</option>
+            <option>Biru — terpercaya, profesional & tenang</option>
+            <option>Cokelat — tradisional, hangat & natural</option>
+            <option>Hitam — elegan, kuat & premium</option>
+            <option>Ungu — kreatif, unik & eksklusif</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="element">Elemen / Simbol Logo</label>
+      <div class="select-wrap">
+        <select id="element">
+          <option value="AI menentukan berdasarkan cerita usaha" selected>AI menentukan (Rekomendasi)</option>
+          <option>Simbol produk</option>
+          <option>Tanaman / daun</option>
+          <option>Hewan</option>
+          <option>Alam</option>
+          <option>Air / laut</option>
+          <option>Rumah / tempat usaha</option>
+          <option>Alat produksi</option>
+          <option>Motif budaya lokal</option>
+          <option>Bentuk geometris</option>
+          <option>Inisial nama usaha</option>
+          <option>Tanpa simbol — tipografi</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="identity">Nuansa Identitas</label>
+      <div class="select-wrap">
+        <select id="identity">
+          <option value="AI menentukan berdasarkan cerita usaha" selected>AI menentukan (Rekomendasi)</option>
+          <option>Lokal & tradisional</option>
+          <option>Modern & urban</option>
+          <option>Natural & ramah lingkungan</option>
+          <option>Profesional</option>
+          <option>Elegan</option>
+          <option>Sederhana & bersahaja</option>
+          <option>Ceria & kekeluargaan</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="primary" id="generateBtn">SALIN / COPY PROMPT AI</button>
+    </div>
+  </section>
+
+  <section class="card result" id="resultCard">
+    <h2 class="section-title">Prompt AI Anda</h2>
+    <div class="prompt-box" id="promptBox"></div>
+
+    
+
+    <div style="margin-top:20px">
+      <h3 style="margin:0 0 8px;font-size:17px">Saat menggunakan AI</h3>
+      <ul class="checklist">
+        <li>Tempel prompt di atas.</li>
+        <li>Jika hasil belum bagus, minta AI membuat alternatif baru dengan prompt yang sama.</li>
+        <li>Pilih logo yang paling sederhana dan mudah dikenali.</li>
+        <li>Pastikan nama usaha tertulis benar sebelum digunakan.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="footer">AI Logo UMKM · PahamSEO</div>
+</main>
+
+<script>
+  const story = document.getElementById('story');
+  const counter = document.getElementById('counter');
+  const nameInput = document.getElementById('name');
+  const category = document.getElementById('category');
+  const style = document.getElementById('style');
+  const color = document.getElementById('color');
+  const element = document.getElementById('element');
+  const identity = document.getElementById('identity');
+  const resultCard = document.getElementById('resultCard');
+  const promptBox = document.getElementById('promptBox');
+
+  story.addEventListener('input', () => {
+    const n = story.value.length;
+    counter.textContent = `${n}/300`;
+    counter.classList.toggle('over', n > 300);
+  });
+
+  function cleanChoice(value) {
+    return value.replace(/\s+—.*$/, '').trim();
+  }
+
+  function buildPrompt() {
+    const brand = nameInput.value.trim();
+    const storyText = story.value.trim();
+    const cat = category.value;
+    const st = cleanChoice(style.value);
+    const col = cleanChoice(color.value);
+    const el = cleanChoice(element.value);
+    const id = cleanChoice(identity.value);
+
+    return `Buat logo profesional untuk UMKM berikut.
+
+NAMA PRODUK / BRAND / USAHA:
+${brand}
+
+KATEGORI USAHA:
+${cat}
+
+CERITA USAHA:
+${storyText}
+
+PREFERENSI DESAIN:
+- Gaya logo: ${st}
+- Warna utama: ${col}
+- Elemen / simbol: ${el}
+- Nuansa identitas: ${id}
+
+INSTRUKSI WAJIB:
+1. Buat LOGO, bukan poster, banner, iklan, kemasan, atau mockup.
+2. Gunakan komposisi SQUARE / PERSEGI 1:1.
+3. Logo harus berada di tengah dengan ruang kosong yang cukup di sekelilingnya.
+4. Gunakan satu simbol utama yang sederhana dan mudah dikenali.
+5. Gunakan maksimal 2 warna utama.
+6. Gunakan gaya flat/vector, bersih, profesional, dan mudah dicetak.
+7. Logo harus tetap terbaca dan dikenali ketika ukurannya kecil.
+8. Jika nama brand ditampilkan, tulis persis: "${brand}"
+9. Jangan mengubah, menerjemahkan, menyingkat, atau menambahkan kata pada nama brand.
+10. Jangan menggunakan foto, mockup, 3D, efek glossy, gradient berlebihan, bayangan berat, atau ornamen rumit.
+11. Jangan menambahkan slogan, alamat, nomor telepon, website, atau teks lain yang tidak diminta.
+12. Background harus putih polos.
+13. Jangan memotong simbol atau tulisan.
+14. Buat hasil yang terlihat seperti identitas merek asli dan siap digunakan untuk UMKM.
+15. Jika ada pilihan desain yang lebih baik berdasarkan cerita usaha, prioritaskan makna dan kesederhanaan daripada dekorasi.
+
+HASIL:
+HANYA BUAT 1 (SATU) GAMBAR LOGO.
+Jangan membuat 4 alternatif, variasi, grid, kolase, contact sheet, atau beberapa logo dalam satu gambar.
+Hasil akhir harus berupa SATU file PNG atau JPG dengan SATU logo saja.
+Gunakan rasio SQUARE / 1:1 dan background putih polos.`;
+  }
+
+  document.getElementById('generateBtn').addEventListener('click', async () => {
+    const brand = nameInput.value.trim();
+    const storyText = story.value.trim();
+
+    if (!brand) {
+      alert('Silakan isi Nama Produk / Brand / Nama Usaha.');
+      nameInput.focus();
+      return;
+    }
+    if (!storyText) {
+      alert('Silakan ceritakan sedikit tentang usaha Anda.');
+      story.focus();
+      return;
+    }
+    if (!category.value) {
+      alert('Silakan pilih Kategori Usaha.');
+      category.focus();
+      return;
+    }
+
+    const prompt = buildPrompt();
+    promptBox.textContent = prompt;
+    resultCard.classList.add('show');
+
+    try {
+      await navigator.clipboard.writeText(prompt);
+      document.getElementById('generateBtn').textContent = '✓ PROMPT BERHASIL DISALIN';
+      setTimeout(() => {
+        document.getElementById('generateBtn').textContent = 'SALIN / COPY PROMPT AI';
+      }, 2200);
+    } catch (e) {
+      const range = document.createRange();
+      range.selectNodeContents(promptBox);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      document.getElementById('generateBtn').textContent = 'PROMPT SIAP — TEKAN COPY';
+    }
+
+  });
+
+
+</script>
+</body>
+</html>
